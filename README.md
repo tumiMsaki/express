@@ -27,18 +27,17 @@ app.use(session({
  ```javascript
  SELECT * FROM article ORDER BY articleID DESC
  ```
- 文件写入：
- ```javascript
- INSERT article SET articleTitle
-
- ```
- </br>
- 由于时间为标准时间</br>
- 将时间更改为：
+将时间改为北京0000-00-00时间：
  ```javascript
  var year = ele.articleTime.getFullYear();
             var month = ele.articleTime.getMonth() + 1 > 10 ? ele.articleTime.getMonth() : '0' + (ele.articleTime.getMonth() + 1);
             var date = ele.articleTime.getDate() > 10 ? ele.articleTime.getDate() : '0' + ele.articleTime.getDate();
             ele.articleTime = year + '-' + month + '-' + date;
+
  ```
+写入文章：
+```javascript
+INSERT article SET articleTitle
+```
+
 
