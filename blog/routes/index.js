@@ -5,6 +5,7 @@ var mysql = require('./../database');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    var user = req.session.user;
     var query = 'SELECT * FROM article ORDER BY articleID DESC';
     mysql.query(query, function(err, rows, fields) {
         var articles = rows;
@@ -14,7 +15,7 @@ router.get('/', function(req, res, next) {
             var date = ele.articleTime.getDate() > 10 ? ele.articleTime.getDate() : '0' + ele.articleTime.getDate();
             ele.articleTime = year + '-' + month + '-' + date;
         });
-        res.render("index", { articles: articles });
+        res.render("index", { articles: articles, user: user });
     });
 });
 
@@ -62,11 +63,29 @@ router.get('/articles/:articleID', function(req, res, next) {
     });
 });
 
-module.exports = router;
+router.get('/modify/:articleID', function(req, res, next) {
+    var articleID = req.params.articleID;
+    var query = 'SELECT * FROM article WHERE articleID=' + mysql.escape(articleID);
+    mysql.query(query, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        var article = rows[0];
+        var title = article.articleTitle;
+        var content = article.articleContent;
+        res.render('modify', { title: title, content: content });
+    });
+});
+
 
 router.get('/login', function(req, res, next) {
     res.render('login', { message: '' });
 });
+
+module.exports = router;
+
+
 
 /*登录验证*/
 router.post('/login', function(req, res, next) {
@@ -87,6 +106,22 @@ router.post('/login', function(req, res, next) {
             return;
         }
         req.session.user = user;
+        res.redirect('/');
+    });
+});
+
+router.post('/modify/:articleID', function(req, res, next) {
+    var articleID = req.params.articleID;
+    console.log(req.seesion.user);
+    var user = req.seesion.user;
+    var title = req.body.title;
+    var content = req.body.content;
+    var query = 'UPDATE article SET articleTitle=' + mysql.escape(title) + ',articleContent=' + mysql.escape(content) + 'WHERE articleID=' + mysql.escape(articleID);
+    mysql.query(query, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+            return;
+        }
         res.redirect('/');
     });
 });

@@ -17,7 +17,12 @@
                                         </a>
                                     </h2>
                                     <section class="main-articles-items-des">
-                                        <p><span>作者:<%= articles[i].articleAuthor%></span><span>发布时间:<%= articles[i].articleTime%></span><span>浏览数:<%=articles[i].articleClick%></span></span>
+                                        <p><span>作者:<%= articles[i].articleAuthor%></span>
+                                            <span>发布时间:<%= articles[i].articleTime%></span>
+                                            <span>浏览数:<%=articles[i].articleClick%></span></span>
+                                            <% if(user) {%>
+                                                <span class="modify"><a href="/modify/<%=articles[i].articleID%>">编辑</a></span>
+                                                <%}%>
                                         </p>
                                     </section>
                                 </li>
