@@ -22,7 +22,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 ```
-*session配置在app.js文件中放在router前*
+*session配置在app.js文件中放在router前*</br>
 文章倒序采用
  ```javascript
  SELECT * FROM article ORDER BY articleID DESC
