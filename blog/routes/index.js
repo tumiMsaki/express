@@ -29,6 +29,14 @@ router.get('/edit', function(req, res, next) {
     res.render('edit');
 });
 
+router.get('/friends', function(req, res, next) {
+    res.render('friends');
+})
+
+router.get('/about', function(req, res, next) {
+    res.render('about');
+})
+
 router.get('/articles/:articleID', function(req, res, next) {
     var articleID = req.params.articleID;
     var query = 'SELECT * FROM article WHERE articleID=' + mysql.escape(articleID);

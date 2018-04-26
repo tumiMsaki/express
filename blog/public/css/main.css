@@ -196,6 +196,7 @@ aside ul li a:hover {
 footer {
     position: absolute;
     display: block;
+    bottom: 20px;
     width: 100%;
 }
 
@@ -280,4 +281,27 @@ section.articles {
 
 .text-group label {
     vertical-align: top;
+}
+
+.friends h2 {
+    text-align: center;
+}
+
+.friends li {
+    float: left;
+    width: 25%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.friends li a:hover {
+    color: #183d8e;
+}
+
+.about h2 {
+    text-align: center;
+}
+
+.about p {
+    text-indent: 2em;
 }
